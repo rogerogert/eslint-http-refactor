@@ -1,0 +1,10 @@
+{
+  "name": "eslint-http-refactor",
+  "version": "1.0.0",
+  "description": "eslint project to fix http deprecated code",
+  "author": "Rogério Teixeira",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.7.0"
+  }
+}
