@@ -34,7 +34,7 @@ module.exports = {
                             identifier: node.callee.property.name
                         },
                         fix: function (fixer) {
-                               return fixer.replaceText(node.callee.property, 'responseNovo');
+                               return fixer.replaceText(node.callee.property, 'then');
                         }
                     })
                 }
