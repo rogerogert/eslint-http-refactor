@@ -11,6 +11,11 @@ module.exports = {
             'put'
         ];
 
+        function fixHttpError(range){
+            var rangeToReplace = [range[0] -2, range[1] + 1];
+            return fixer => fixer.replaceTextRange(rangeToReplace, ',');
+        }
+
         function isHttpCall(node) {
             if (node.callee.type === 'MemberExpression') {
                 return httpMethods.indexOf(node.callee.property.name) !== -1 ||
@@ -39,10 +44,7 @@ module.exports = {
                     context.report({
                         node: node,
                         message: "'$http error is deprecated.",
-                        fix: function(fixer){
-                            var rangeToReplace = [node.callee.property.range[0] -2, node.callee.property.range[1] + 1];
-                            return fixer.replaceTextRange(rangeToReplace, ',');
-                        }
+                        fix: fixHttpError(node.callee.property.range)
                     })
                 }
             }
