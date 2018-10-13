@@ -27,7 +27,16 @@ module.exports = {
                     return;
                 }
                 if (node.callee.property.name === 'success' && isHttpCall(node)) {
-                    return context.report(node, '$http success is deprecated. Use then instead');
+                    context.report({
+                        node: node,
+                        message: "'$http {identifier} is deprecated.",
+                        data: {
+                            identifier: node.callee.property.name
+                        },
+                        fix: function (fixer) {
+                               return fixer.replaceText(node.callee.property, 'responseNovo');
+                        }
+                    })
                 }
                 if (node.callee.property.name === 'error' && isHttpCall(node)) {
                     context.report(node, '$http error is deprecated. Use then or catch instead');
